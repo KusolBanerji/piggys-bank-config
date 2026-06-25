@@ -1,0 +1,27 @@
+server:
+  port: 9000              # the ONE public-facing port
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: user-service-route
+          uri: lb://services                    # "services" = User Service's app name
+          predicates:
+            - Path=/users-service/**
+          filters:
+            - StripPrefix=1                       # removes "/users-service" before forwarding
+
+        - id: account-service-route
+          uri: lb://account-service
+          predicates:
+            - Path=/accounts-service/**
+          filters:
+            - StripPrefix=1
+
+        - id: transaction-service-route
+          uri: lb://transaction-service
+          predicates:
+            - Path=/transactions-service/**
+          filters:
+            - StripPrefix=1
