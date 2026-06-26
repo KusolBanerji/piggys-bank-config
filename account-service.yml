@@ -20,3 +20,8 @@ spring:
       path: /h2-console
 
 # user-service.url removed — Eureka handles discovery now ✅
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    ip-address: 127.0.0.1  
